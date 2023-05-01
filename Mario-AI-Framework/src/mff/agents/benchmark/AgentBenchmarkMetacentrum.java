@@ -16,7 +16,7 @@ import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import static mff.agents.astarGrid.AStarGridHelper.giveLevelTilesWithPath;
+import static mff.agents.common.AStarGridHelper.giveLevelTilesWithPath;
 import static mff.LevelLoader.getLevel;
 
 public class AgentBenchmarkMetacentrum {
