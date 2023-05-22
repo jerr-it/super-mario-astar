@@ -17,6 +17,7 @@ public class MarioWorld {
     public int pauseTimer = 0;
     public int fireballsOnScreen = 0;
     public int currentTimer = -1;
+    public int maxTimer = -1;
     public float cameraX;
     public float cameraY;
     public Mario mario;
@@ -38,6 +39,8 @@ public class MarioWorld {
 
     private MarioBackground[] backgrounds = new MarioBackground[2];
 
+    ArrayList<MarioPosition> path;
+
     public MarioWorld(MarioEvent[] killEvents) {
         this.pauseTimer = 0;
         this.gameStatus = GameStatus.RUNNING;
@@ -49,6 +52,7 @@ public class MarioWorld {
         this.effects = new ArrayList<>();
         this.lastFrameEvents = new ArrayList<>();
         this.killEvents = killEvents;
+        this.path = new ArrayList<>();
     }
 
     public void initializeVisuals(GraphicsConfiguration graphicsConfig) {
@@ -87,6 +91,7 @@ public class MarioWorld {
 
     public void initializeLevel(String level, int timer) {
         this.currentTimer = timer;
+        this.maxTimer = timer;
         this.level = new MarioLevel(level, this.visuals);
 
         this.mario = new Mario(this.visuals, this.level.marioTileX * 16, this.level.marioTileY * 16);
@@ -116,6 +121,7 @@ public class MarioWorld {
         world.currentTimer = this.currentTimer;
         world.currentTick = this.currentTick;
         world.level = this.level.clone();
+        world.path = this.path;
         for (MarioSprite sprite : this.sprites) {
             MarioSprite cloneSprite = sprite.clone();
             cloneSprite.world = world;
@@ -294,6 +300,7 @@ public class MarioWorld {
         if (this.gameStatus != GameStatus.RUNNING) {
             return;
         }
+        this.path.add(new MarioPosition(this.mario.getMapX(), this.mario.getMapY()));
         if (this.pauseTimer > 0) {
             this.pauseTimer -= 1;
             if (this.visuals) {

@@ -24,6 +24,7 @@ public class MarioResult {
     }
 
     /**
+     *
      * Get the current state of the running game
      *
      * @return GameStatus the current state (WIN, LOSE, TIME_OUT, RUNNING)
@@ -48,6 +49,10 @@ public class MarioResult {
      */
     public int getRemainingTime() {
         return this.world.currentTimer;
+    }
+
+    public int getTimeLimit() {
+        return this.world.maxTimer;
     }
 
     /**
@@ -224,6 +229,25 @@ public class MarioResult {
     }
 
     /**
+     * Get all jumps performed by mario
+     * @return ArrayList of jumps in pairs of JUMP, LAND, JUMP, LAND, ...
+     */
+    public ArrayList<JumpEvent> getJumps() {
+        ArrayList<JumpEvent> jumpEvents = new ArrayList<>();
+        MarioEvent start = null;
+        for (MarioEvent e : this.gameEvents) {
+            if (e.getEventType() == EventType.JUMP.getValue()) {
+                start = e;
+            }
+            if (e.getEventType() == EventType.LAND.getValue()) {
+                jumpEvents.add(new JumpEvent(start, e));
+                start = null;
+            }
+        }
+        return jumpEvents;
+    }
+
+    /**
      * get number of jumps performed by mario during the game
      *
      * @return the number of jumps performed by mario during the game
@@ -357,5 +381,36 @@ public class MarioResult {
             }
         }
         return bricks;
+    }
+
+    public ArrayList<MarioPosition> getMarioPath() {
+        return this.world.path;
+    }
+
+    /**
+     * Returns events matching one of the types given in eventTypes
+     * @param eventTypes types of events to search for
+     * @return list of events
+     */
+    public ArrayList<MarioEvent> getEvents(ArrayList<EventType> eventTypes, ArrayList<Integer> eventParams) {
+        ArrayList<MarioEvent> events = new ArrayList<>();
+        for (MarioEvent e : this.gameEvents) {
+            typeloop: for (EventType eventType : eventTypes) {
+                if (e.getEventType() == eventType.getValue()) {
+                    if (eventParams.size() > 0) {
+                        for (int eventParam : eventParams) {
+                            if (e.getEventParam() == eventParam) {
+                                events.add(e);
+                                break typeloop;
+                            }
+                        }
+                    } else {
+                        events.add(e);
+                        break;
+                    }
+                }
+            }
+        }
+        return events;
     }
 }
