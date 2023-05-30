@@ -33,6 +33,12 @@ public class MarioResult {
         return this.world.gameStatus;
     }
 
+    public MarioStatus getMarioStatus() {
+        return new MarioStatus(
+            this.world.gameStatus, (int) (this.world.mario.x / 16), (int) (this.world.mario.y / 16)
+        );
+    }
+
     /**
      * The percentage of distance traversed between mario and the goal
      *
