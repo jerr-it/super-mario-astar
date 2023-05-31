@@ -300,7 +300,7 @@ public class MarioWorld {
         if (this.gameStatus != GameStatus.RUNNING) {
             return;
         }
-        this.path.add(new MarioPosition(this.mario.getMapX(), this.mario.getMapY()));
+        this.path.add(new MarioPosition(this.mario.x, this.mario.y));
         if (this.pauseTimer > 0) {
             this.pauseTimer -= 1;
             if (this.visuals) {

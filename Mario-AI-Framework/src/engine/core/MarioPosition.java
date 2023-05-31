@@ -1,19 +1,19 @@
 package engine.core;
 
 public class MarioPosition {
-    private final int x;
-    private final int y;
+    private final float x;
+    private final float y;
 
-    MarioPosition(int x, int y) {
+    MarioPosition(float x, float y) {
         this.x = x;
         this.y = y;
     }
 
-    public int getX() {
+    public float getX() {
         return this.x;
     }
 
-    public int getY() {
+    public float getY() {
         return this.y;
     }
 }
