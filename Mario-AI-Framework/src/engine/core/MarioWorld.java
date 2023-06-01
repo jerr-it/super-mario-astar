@@ -339,7 +339,7 @@ public class MarioWorld {
         for (MarioSprite sprite : sprites) {
             if (sprite.x < cameraX - 64 || sprite.x > cameraX + MarioGame.width + 64 || sprite.y > this.level.height + 32) {
                 if (sprite.type == SpriteType.MARIO) {
-                    this.lose();
+                    this.lose();  // DEATH BY FALL
                 }
                 this.removeSprite(sprite);
                 if (this.isEnemy(sprite) && sprite.y > MarioGame.height + 32) {
@@ -453,7 +453,7 @@ public class MarioWorld {
         if (this.killEvents != null) {
             for (MarioEvent k : this.killEvents) {
                 if (this.lastFrameEvents.contains(k)) {
-                    this.lose();
+                    this.lose(); // DEATH BY HURT
                 }
             }
         }

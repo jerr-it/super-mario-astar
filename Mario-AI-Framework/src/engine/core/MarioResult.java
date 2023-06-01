@@ -35,7 +35,7 @@ public class MarioResult {
 
     public MarioStatus getMarioStatus() {
         return new MarioStatus(
-            this.world.gameStatus, (int) (this.world.mario.x / 16), (int) (this.world.mario.y / 16)
+            this.world.gameStatus, this.world.mario.x, this.world.mario.y
         );
     }
 

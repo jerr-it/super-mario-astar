@@ -4,10 +4,10 @@ import engine.helper.GameStatus;
 
 public class MarioStatus {
     public int status;
-    public int x;
-    public int y;
+    public float x;
+    public float y;
 
-    public MarioStatus(GameStatus status, int x, int y) {
+    public MarioStatus(GameStatus status, float x, float y) {
         switch (status) {
             case RUNNING -> this.status = 0;
             case WIN -> this.status = 1;
@@ -22,11 +22,11 @@ public class MarioStatus {
         return this.status;
     }
 
-    public int getX() {
+    public float getX() {
         return this.x;
     }
 
-    public int getY() {
+    public float getY() {
         return this.y;
     }
 }
