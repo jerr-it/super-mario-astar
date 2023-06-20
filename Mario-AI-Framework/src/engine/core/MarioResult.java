@@ -393,6 +393,10 @@ public class MarioResult {
         return this.world.path;
     }
 
+    public int getDeathCause() {
+        return this.world.deathType.getValue();
+    }
+
     /**
      * Returns events matching one of the types given in eventTypes
      * @param eventTypes types of events to search for
